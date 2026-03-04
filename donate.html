@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title><!DOCTYPE html>
+        <html lang="en">
+        <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Donate – Shine Society</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+    <style>
+        /* Your original styles – unchanged */
+        :root {
+            --blue: #0f172a;
+            --lightblue: #60a5fa;
+            --gold: #fbbf24;
+            --purple: #a78bfa;
+            --glass: rgba(255, 255, 255, 0.08);
+            --glass-border: rgba(255, 255, 255, 0.14);
+            --shadow-soft: 0 8px 32px rgba(15, 23, 42, 0.18);
+            --shadow-glow: 0 20px 60px rgba(251, 191, 36, 0.25);
+            --transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        * { margin:0; padding:0; box-sizing:border-box; }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f8faff 0%, #e0f2fe 100%);
+            color: #1e293b;
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3 { font-family: 'Montserrat', sans-serif; font-weight: 800; }
+
+        section { padding: clamp(80px, 12vw, 140px) 5%; text-align: center; }
+
+        .container { max-width: 1100px; margin: 0 auto; }
+
+        nav {
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--glass-border);
+            padding: 1.2rem 5%;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.9rem;
+            font-weight: 900;
+        }
+
+        .logo i { color: var(--gold); }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .btn-home {
+            background: linear-gradient(45deg, var(--gold), #f59e0b);
+            color: #0f172a;
+            padding: 12px 32px;
+            border: none;
+            border-radius: 999px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 8px 24px rgba(251,191,36,0.3);
+            transition: var(--transition);
+        }
+
+        .btn-home:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 32px rgba(251,191,36,0.4);
+        }
+
+        .donate-hero {
+            padding: 180px 5% 100px;
+            background: linear-gradient(135deg, rgba(251,191,36,0.08) 0%, rgba(167,139,250,0.08) 100%);
+        }
+
+        .donate-hero h1 {
+            font-size: clamp(3.8rem, 10vw, 7rem);
+            background: linear-gradient(90deg, var(--gold), var(--purple), var(--gold));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 1.2rem;
+        }
+
+        .donate-hero p {
+            font-size: 1.35rem;
+            max-width: 780px;
+            margin: 0 auto 3rem;
+            color: #475569;
+        }
+
+        .impact-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 2rem;
+            margin: 4rem auto;
+            max-width: 1000px;
+        }
+
+        .impact-card {
+            background: var(--glass);
+            backdrop-filter: blur(16px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: var(--shadow-soft);
+            transition: var(--transition);
+        }
+
+        .impact-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .impact-card i {
+            font-size: 3.5rem;
+            color: var(--gold);
+            margin-bottom: 1rem;
+        }
+
+        .impact-card h3 {
+            font-size: 2.5rem;
+            color: var(--blue);
+            margin-bottom: 0.5rem;
+        }
+
+        .donation-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
+            margin: 5rem auto 0;
+        }
+
+        .donation-card {
+            background: white;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: var(--shadow-soft);
+            transition: var(--transition);
+            text-align: center;
+        }
+
+        .donation-card:hover {
+            transform: translateY(-12px);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .donation-amount {
+            background: linear-gradient(45deg, var(--gold), #f59e0b);
+            color: #0f172a;
+            padding: 2.5rem 1rem;
+            font-size: 2.8rem;
+            font-weight: 900;
+        }
+
+        .donation-card h3 {
+            font-size: 1.8rem;
+            color: var(--blue);
+            margin: 1.5rem 1rem 1rem;
+        }
+
+        .donation-card p {
+            color: #475569;
+            padding: 0 1.5rem 2rem;
+            font-size: 1.1rem;
+        }
+
+        .donate-btn {
+            background: var(--gold);
+            color: #0f172a;
+            padding: 16px 48px;
+            border: none;
+            border-radius: 999px;
+            font-size: 1.25rem;
+            font-weight: 700;
+            cursor: pointer;
+            margin: 0 auto 2.5rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: 0 12px 40px rgba(251,191,36,0.4);
+            transition: var(--transition);
+        }
+
+        .donate-btn:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .custom-donation {
+            background: var(--glass);
+            backdrop-filter: blur(16px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 3rem 2rem;
+            margin: 5rem auto 0;
+            max-width: 700px;
+            box-shadow: var(--shadow-soft);
+        }
+
+        .custom-donation input {
+            width: 100%;
+            padding: 16px;
+            font-size: 1.4rem;
+            text-align: center;
+            border: 2px solid var(--gold);
+            border-radius: 16px;
+            margin: 1.5rem 0 2rem;
+            background: rgba(255,255,255,0.4);
+        }
+
+        footer {
+            background: var(--blue);
+            color: white;
+            padding: 80px 5% 40px;
+            text-align: center;
+        }
+
+        .copyright {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #94a3b8;
+        }
+
+        @media (max-width: 768px) {
+            .donate-hero { padding: 140px 5% 80px; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Minimal Navbar -->
+<nav>
+    <div class="logo">
+        <i class="fas fa-star"></i>
+        <span>Shine Society</span>
+    </div>
+
+    <div class="nav-right">
+        <a href="shine.html" class="btn-home">
+            <i class="fas fa-home"></i> Back to Home
+        </a>
+    </div>
+</nav>
+
+<!-- Donation Hero -->
+<section class="donate-hero">
+    <div class="container">
+        <h1 data-aos="fade-down">Support the Shine ✨</h1>
+        <p data-aos="fade-up" data-aos-delay="200">
+            Your donation helps us create more opportunities, reach more youth, and make a bigger impact in our communities.
+            Every cedi counts — thank you for believing in the next generation.
+        </p>
+
+        <!-- Impact Stats -->
+        <div class="impact-stats">
+            <div class="impact-card" data-aos="fade-up" data-aos-delay="100">
+                <i class="fas fa-users"></i>
+                <h3>500+</h3>
+                <p>Youth Empowered</p>
+            </div>
+            <div class="impact-card" data-aos="fade-up" data-aos-delay="150">
+                <i class="fas fa-hand-holding-heart"></i>
+                <h3>120+</h3>
+                <p>Projects Funded</p>
+            </div>
+            <div class="impact-card" data-aos="fade-up" data-aos-delay="200">
+                <i class="fas fa-school"></i>
+                <h3>1,200+</h3>
+                <p>School Supplies Given</p>
+            </div>
+        </div>
+
+        <!-- Suggested Donation Amounts – using Paystack Payment Links (easiest) -->
+        <div class="donation-options">
+            <div class="donation-card" data-aos="zoom-in" data-aos-delay="100">
+                <div class="donation-amount">GHS 50</div>
+                <h3>Starter Spark</h3>
+                <p>Help cover transport for one outreach event or buy supplies for 5 kids</p>
+                <!-- Replace with your real Paystack payment link -->
+                <a href="https://tinyurl.com/4dzcm49w" class="donate-btn" target="_blank">
+                    <i class="fas fa-hand-holding-heart"></i> Donate GHS 50
+                </a>
+            </div>
+
+            <div class="donation-card" data-aos="zoom-in" data-aos-delay="200">
+                <div class="donation-amount">GHS 100</div>
+                <h3>Shine Booster</h3>
+                <p>Fund a full workshop session or support school kits for 10 children</p>
+                <a href="https://tinyurl.com/4dzcm49w" class="donate-btn" target="_blank">
+                    <i class="fas fa-hand-holding-heart"></i> Donate GHS 100
+                </a>
+            </div>
+
+            <div class="donation-card" data-aos="zoom-in" data-aos-delay="300">
+                <div class="donation-amount">GHS 250</div>
+                <h3>Impact Maker</h3>
+                <p>Sponsor a complete community clean-up or leadership training day</p>
+                <a href="https://tinyurl.com/4dzcm49w" class="donate-btn" target="_blank">
+                    <i class="fas fa-hand-holding-heart"></i> Donate GHS 250
+                </a>
+            </div>
+
+            <div class="donation-card" data-aos="zoom-in" data-aos-delay="400">
+                <div class="donation-amount">Any Amount</div>
+                <h3>Custom Gift</h3>
+                <p>Donate whatever feels right — every contribution helps us shine brighter</p>
+                <!-- Use your custom/open amount payment page link -->
+                <a href="https://tinyurl.com/4dzcm49w" class="donate-btn" target="_blank">
+                    <i class="fas fa-hand-holding-heart"></i> Donate Now
+                </a>
+            </div>
+        </div>
+
+        <!-- Custom Donation Input + Paystack Inline Popup (more advanced) -->
+        <div class="custom-donation" data-aos="fade-up" data-aos-delay="500">
+            <h2>Enter Your Amount</h2>
+            <p style="margin: 1.5rem 0 2rem; color: #475569;">
+                Choose any amount that fits your heart — no amount is too small.
+            </p>
+            <input type="number" id="donate-amount" placeholder="GHS ___" min="1" step="1">
+            <button class="donate-btn" style="margin-top: 2rem;" onclick="payWithPaystack()">
+                <i class="fas fa-lock"></i> Secure Donation
+            </button>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer>
+    <div class="copyright">
+        © 2025 Shine Society ✨ | Made with <i class="fas fa-heart" style="color: #f87171;"></i> for the next generation
+    </div>
+</footer>
+
+<!-- Scroll to top -->
+<div class="scroll-top" id="scrollTop">
+    <i class="fas fa-arrow-up"></i>
+</div>
+
+<!-- AOS JS -->
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+<!-- Paystack Inline JS SDK (for popup method) -->
+<script src="https://js.paystack.co/v1/inline.js"></script>
+
+<script>
+    AOS.init({ duration: 800, once: true });
+
+    // Scroll to top
+    const scrollTop = document.getElementById('scrollTop');
+    window.addEventListener('scroll', () => {
+        scrollTop.classList.toggle('active', window.scrollY > 400);
+    });
+    scrollTop.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // Paystack Popup – Custom Amount (replace pk_test_... with your REAL Public Key)
+    function payWithPaystack() {
+        const amountInput = document.getElementById('donate-amount');
+        const amount = amountInput.value * 100; // Paystack uses kobo (GHS × 100)
+
+        if (!amount || amount < 100) { // minimum 1 GHS
+            alert("Please enter a valid amount (at least GHS 1)");
+            return;
+        }
+
+        var handler = PaystackPop.setup({
+            key: 'pk_test_xxxxxxxxxxxxxxxxxxxxxxxxxxxx', // ← YOUR PUBLIC KEY HERE (pk_test_ or pk_live_)
+            email: 'donor@example.com',                 // optional – can ask user for email
+            amount: amount,
+            currency: 'GHS',
+            ref: '' + Math.floor((Math.random() * 1000000000) + 1), // generates a pseudo-unique reference
+            onClose: function(){
+                alert('Transaction cancelled.');
+            },
+            callback: function(response){
+                alert('Payment successful! Reference: ' + response.reference);
+                // Optionally redirect or show thank you page
+                // window.location = "thank-you.html?ref=" + response.reference;
+            }
+        });
+        handler.openIframe();
+    }
+</script>
+</body>
+</html></title>
+</head>
+<body>
+
+</body>
+</html>

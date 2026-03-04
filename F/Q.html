@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title><!DOCTYPE html>
+      <html lang="en">
+      <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>FAQ – Shine Society</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+  <!-- Your existing CSS (kept as-is, just added minimal nav styles) -->
+  <style>
+    :root {
+        --blue: #0f172a;
+        --lightblue: #60a5fa;
+        --gold: #fbbf24;
+        --purple: #a78bfa;
+        --glass: rgba(255, 255, 255, 0.08);
+        --glass-border: rgba(255, 255, 255, 0.14);
+        --shadow-soft: 0 8px 32px rgba(15, 23, 42, 0.18);
+        --shadow-glow: 0 20px 60px rgba(251, 191, 36, 0.25);
+        --transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    * { margin:0; padding:0; box-sizing:border-box; }
+
+    body {
+        font-family: 'Poppins', sans-serif;
+        background: #f8faff;
+        color: #1e293b;
+        line-height: 1.7;
+        overflow-x: hidden;
+    }
+
+    h1, h2, h3 { font-family: 'Montserrat', sans-serif; font-weight: 800; }
+
+    section { padding: clamp(80px, 12vw, 140px) 5%; text-align: center; }
+
+    .container { max-width: 1000px; margin: 0 auto; }
+
+    nav {
+        background: rgba(15, 23, 42, 0.85);
+        backdrop-filter: blur(16px);
+        border-bottom: 1px solid var(--glass-border);
+        padding: 1.2rem 5%;
+        position: fixed;
+        width: 100%;
+        top: 0;
+        z-index: 1000;
+        color: white;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .logo {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-size: 1.9rem;
+        font-weight: 900;
+    }
+
+    .logo i { color: var(--gold); }
+
+    .nav-right {
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+    }
+
+    .btn-home {
+        background: linear-gradient(45deg, var(--gold), #f59e0b);
+        color: #0f172a;
+        padding: 12px 32px;
+        border: none;
+        border-radius: 999px;
+        font-size: 1.1rem;
+        font-weight: 700;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        box-shadow: 0 8px 24px rgba(251,191,36,0.3);
+        transition: var(--transition);
+    }
+
+    .btn-home:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 12px 32px rgba(251,191,36,0.4);
+    }
+
+    .faq-hero {
+        padding: 180px 5% 100px;
+        text-align: center;
+    }
+
+    .faq-hero h1 {
+        font-size: clamp(3.5rem, 10vw, 6.5rem);
+        background: linear-gradient(90deg, var(--gold), var(--purple), var(--gold));
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        margin-bottom: 1rem;
+    }
+
+    .faq-hero p {
+        font-size: 1.3rem;
+        max-width: 720px;
+        margin: 0 auto 3rem;
+        color: #475569;
+    }
+
+    .faq-list {
+        max-width: 900px;
+        margin: 0 auto;
+    }
+
+    .faq-item {
+        background: var(--glass);
+        backdrop-filter: blur(16px);
+        border: 1px solid var(--glass-border);
+        border-radius: 16px;
+        margin-bottom: 1.5rem;
+        overflow: hidden;
+        box-shadow: var(--shadow-soft);
+        transition: var(--transition);
+    }
+
+    .faq-item:hover {
+        transform: translateY(-6px);
+        box-shadow: var(--shadow-glow);
+    }
+
+    .faq-question {
+        padding: 1.5rem 2rem;
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: var(--blue);
+        cursor: pointer;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        transition: var(--transition);
+    }
+
+    .faq-question:hover {
+        background: rgba(251,191,36,0.08);
+    }
+
+    .faq-answer {
+        padding: 0 2rem 1.5rem;
+        font-size: 1.05rem;
+        color: #475569;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.4s ease, padding 0.4s ease;
+    }
+
+    .faq-item.active .faq-answer {
+        max-height: 500px; /* adjust if answers are longer */
+        padding: 0 2rem 1.5rem;
+    }
+
+    .faq-item.active .faq-question {
+        background: rgba(251,191,36,0.12);
+    }
+
+    .faq-icon {
+        font-size: 1.4rem;
+        transition: transform 0.3s ease;
+    }
+
+    .faq-item.active .faq-icon {
+        transform: rotate(180deg);
+    }
+
+    footer {
+        background: var(--blue);
+        color: white;
+        padding: 80px 5% 40px;
+    }
+
+    .copyright {
+        text-align: center;
+        padding-top: 3rem;
+        border-top: 1px solid rgba(255,255,255,0.1);
+        color: #94a3b8;
+    }
+
+    @media (max-width: 768px) {
+        .faq-hero { padding: 140px 5% 80px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Minimal Navbar – Only logo + Back to Home -->
+<nav>
+  <div class="logo">
+    <i class="fas fa-star"></i>
+    <span>Shine Society</span>
+  </div>
+
+  <div class="nav-right">
+    <a href="shine.html" class="btn-home">
+      <i class="fas fa-home"></i> Back to Home
+    </a>
+  </div>
+</nav>
+
+<!-- FAQ Hero -->
+<section class="faq-hero">
+  <div class="container">
+    <h1 data-aos="fade-down">Frequently Asked Questions</h1>
+    <p data-aos="fade-up" data-aos-delay="200">
+      Got questions? We've got answers! Here's everything you need to know about joining, events, and life at Shine Society.
+    </p>
+
+    <div class="faq-list">
+      <div class="faq-item" data-aos="fade-up">
+        <div class="faq-question">
+          Who can join Shine Society?
+          <i class="fas fa-chevron-down faq-icon"></i>
+        </div>
+        <div class="faq-answer">
+          <p>Shine Society is open to young people aged 13–35 who are passionate about friendship, fun, personal growth, and making a positive impact. No experience needed — just bring your energy and good vibes!</p>
+        </div>
+      </div>
+
+      <div class="faq-item" data-aos="fade-up" data-aos-delay="100">
+        <div class="faq-question">
+          Is there any membership fee?
+          <i class="fas fa-chevron-down faq-icon"></i>
+        </div>
+        <div class="faq-answer">
+          <p>No! Membership is completely free. We believe everyone should have the chance to shine without financial barriers. Some events may have small optional contributions (e.g. for transport or snacks), but nothing is mandatory.</p>
+        </div>
+      </div>
+
+      <div class="faq-item" data-aos="fade-up" data-aos-delay="200">
+        <div class="faq-question">
+          How often do you hold events and meetings?
+          <i class="fas fa-chevron-down faq-icon"></i>
+        </div>
+        <div class="faq-answer">
+          <p>We usually have at least 2–3 activities per month — mix of social hangouts, charity projects, workshops, and celebration nights. Big events (like our annual outreach) happen 1–2 times a year. We announce everything on WhatsApp, Instagram, and our website.</p>
+        </div>
+      </div>
+
+      <div class="faq-item" data-aos="fade-up" data-aos-delay="300">
+        <div class="faq-question">
+          What kind of activities do you do?
+          <i class="fas fa-chevron-down faq-icon"></i>
+        </div>
+        <div class="faq-answer">
+          <p>We do a bit of everything: charity drives, beach clean-ups, skill-building workshops (leadership, public speaking, creative arts), game nights, themed parties, deep talks, and community impact projects. Check our Activities and Gallery sections for real examples!</p>
+        </div>
+      </div>
+
+      <div class="faq-item" data-aos="fade-up" data-aos-delay="400">
+        <div class="faq-question">
+          Do I need any special skills or experience to join?
+          <i class="fas fa-chevron-down faq-icon"></i>
+        </div>
+        <div class="faq-answer">
+          <p>No special skills required! Whether you're outgoing or shy, creative or analytical — there's a place for you. We believe everyone has something unique to bring, and we help each other grow.</p>
+        </div>
+      </div>
+
+      <div class="faq-item" data-aos="fade-up" data-aos-delay="500">
+        <div class="faq-question">
+          How do I stay updated on events and news?
+          <i class="fas fa-chevron-down faq-icon"></i>
+        </div>
+        <div class="faq-answer">
+          <p>Join our WhatsApp group (link shared after registration), follow us on Instagram and TikTok, or check the Events and Blog sections on the website. We also send emails for important updates.</p>
+        </div>
+      </div>
+
+      <div class="faq-item" data-aos="fade-up" data-aos-delay="600">
+        <div class="faq-question">
+          Can I volunteer or help organize events?
+          <i class="fas fa-chevron-down faq-icon"></i>
+        </div>
+        <div class="faq-answer">
+          <p>Absolutely! Once you're a member, you can join committees, suggest ideas, or even lead small projects. We love when members take initiative — it's how we grow stronger together.</p>
+        </div>
+      </div>
+
+      <div class="faq-item" data-aos="fade-up" data-aos-delay="700">
+        <div class="faq-question">
+          What happens after I submit the registration form?
+          <i class="fas fa-chevron-down faq-icon"></i>
+        </div>
+        <div class="faq-answer">
+          <p>We'll review your application within 3–5 days and contact you via WhatsApp or email to welcome you, add you to our group, and invite you to your first event or orientation. Welcome aboard!</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="copyright">
+    © 2026 Shine Society ✨ | Made with <i class="fas fa-heart" style="color: #f87171;"></i> for the next generation
+  </div>
+</footer>
+
+<!-- Scroll to top -->
+<div class="scroll-top" id="scrollTop">
+  <i class="fas fa-arrow-up"></i>
+</div>
+
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script>
+  AOS.init({ duration: 800, once: true });
+
+  // FAQ Accordion
+  document.querySelectorAll('.faq-question').forEach(question => {
+      question.addEventListener('click', () => {
+          const item = question.parentElement;
+          item.classList.toggle('active');
+      });
+  });
+
+  // Scroll to top
+  const scrollTop = document.getElementById('scrollTop');
+  window.addEventListener('scroll', () => {
+      scrollTop.classList.toggle('active', window.scrollY > 400);
+  });
+
+  scrollTop.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+</script>
+</body>
+</html></title>
+</head>
+<body>
+
+</body>
+</html>

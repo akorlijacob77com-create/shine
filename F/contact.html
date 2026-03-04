@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title><!DOCTYPE html>
+        <html lang="en">
+        <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Gallery – Shine Society</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+    <style>
+        :root {
+            --blue: #0f172a;
+            --lightblue: #60a5fa;
+            --gold: #fbbf24;
+            --purple: #a78bfa;
+            --glass: rgba(255, 255, 255, 0.08);
+            --glass-border: rgba(255, 255, 255, 0.14);
+            --shadow-soft: 0 8px 32px rgba(15, 23, 42, 0.18);
+            --shadow-glow: 0 20px 60px rgba(251, 191, 36, 0.25);
+            --transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        * { margin:0; padding:0; box-sizing:border-box; }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #f8faff;
+            color: #1e293b;
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3 { font-family: 'Montserrat', sans-serif; font-weight: 800; }
+
+        section { padding: clamp(80px, 12vw, 140px) 5%; text-align: center; }
+
+        .container { max-width: 1400px; margin: 0 auto; }
+
+        nav {
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--glass-border);
+            padding: 1.2rem 5%;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.9rem;
+            font-weight: 900;
+        }
+
+        .logo i { color: var(--gold); }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 2.5rem;
+            align-items: center;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border-radius: 12px;
+            transition: var(--transition);
+        }
+
+        nav ul li a:hover, nav ul li a.active {
+            color: var(--gold);
+            background: rgba(255,255,255,0.08);
+        }
+
+        .mobile-menu-btn { display: none; }
+
+        .gallery-hero {
+            padding: 180px 5% 100px;
+            background: linear-gradient(135deg, rgba(96,165,250,0.1) 0%, rgba(251,191,36,0.1) 100%);
+        }
+
+        .gallery-hero h1 {
+            font-size: clamp(3.8rem, 10vw, 7rem);
+            background: linear-gradient(90deg, var(--gold), var(--purple), var(--gold));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 1rem;
+        }
+
+        .gallery-hero p {
+            font-size: 1.35rem;
+            max-width: 780px;
+            margin: 0 auto 3rem;
+            color: #475569;
+        }
+
+        .gallery-filters {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1.2rem;
+            margin-bottom: 3.5rem;
+        }
+
+        .filter-btn {
+            background: rgba(251,191,36,0.12);
+            color: var(--blue);
+            border: none;
+            padding: 12px 28px;
+            border-radius: 999px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background: var(--gold);
+            color: #0f172a;
+            transform: translateY(-4px);
+            box-shadow: 0 12px 32px rgba(251,191,36,0.3);
+        }
+
+        .gallery-masonry {
+            column-count: 4;
+            column-gap: 1.8rem;
+        }
+
+        .gallery-item {
+            break-inside: avoid;
+            margin-bottom: 1.8rem;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: var(--shadow-soft);
+            transition: var(--transition);
+            cursor: pointer;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s forwards;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-12px) scale(1.03);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.6s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.12);
+        }
+
+        @keyframes fadeInUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .load-more {
+            margin: 5rem auto 0;
+            background: linear-gradient(45deg, var(--gold), #f59e0b);
+            color: #0f172a;
+            padding: 16px 48px;
+            border: none;
+            border-radius: 999px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 12px 40px rgba(251,191,36,0.35);
+            transition: var(--transition);
+        }
+
+        .load-more:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-glow);
+        }
+
+        /* Lightbox */
+        .lightbox {
+            position: fixed;
+            inset: 0;
+            background: rgba(15,23,42,0.95);
+            z-index: 9999;
+            display: none;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .lightbox.show {
+            display: flex;
+        }
+
+        .lightbox-content {
+            position: relative;
+            max-width: 90%;
+            max-height: 90vh;
+        }
+
+        .lightbox-img {
+            max-width: 100%;
+            max-height: 85vh;
+            border-radius: 16px;
+            box-shadow: 0 0 80px rgba(251,191,36,0.4);
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: -50px;
+            right: 0;
+            color: white;
+            font-size: 3.5rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .lightbox-close:hover {
+            color: var(--gold);
+            transform: rotate(90deg);
+        }
+
+        .lightbox-nav {
+            position: absolute;
+            bottom: -60px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 2.5rem;
+        }
+
+        .lightbox-nav-btn {
+            background: rgba(255,255,255,0.15);
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 1.6rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .lightbox-nav-btn:hover {
+            background: var(--gold);
+            color: #0f172a;
+            transform: translateY(-4px);
+        }
+
+        /* Admin Upload Note */
+        .admin-note {
+            margin: 6rem auto 3rem;
+            max-width: 900px;
+            background: rgba(251,191,36,0.08);
+            backdrop-filter: blur(16px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 2.5rem;
+            text-align: left;
+            font-size: 1.1rem;
+            color: #475569;
+        }
+
+        .admin-note h3 {
+            color: var(--gold);
+            margin-bottom: 1.2rem;
+        }
+
+        .admin-note ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .admin-note li {
+            margin-bottom: 1rem;
+            position: relative;
+            padding-left: 1.8rem;
+        }
+
+        .admin-note li::before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: var(--gold);
+        }
+
+        footer {
+            background: var(--blue);
+            color: white;
+            padding: 80px 5% 40px;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 3rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #94a3b8;
+        }
+
+        @media (max-width: 1200px) { .gallery-masonry { column-count: 3; } }
+        @media (max-width: 768px)  { .gallery-masonry { column-count: 2; } }
+        @media (max-width: 576px)  { .gallery-masonry { column-count: 1; } }
+    </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav>
+    <div class="logo">
+        <i class="fas fa-star"></i>
+        <span>Shine Society</span>
+    </div>
+
+    <ul id="navMenu">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="index.html#about">About</a></li>
+        <li><a href="index.html#team">Team</a></li>
+        <li><a href="index.html#activities">Activities</a></li>
+        <li><a href="gallery-full.html" class="active">Gallery</a></li>
+        <li><a href="index.html#events">Events</a></li>
+        <li><a href="blog.html">Blog / Stories</a></li>
+        <li><a href="resources.html">Resources</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="Reg.html" class="btn btn-outline">Join Us</a></li>
+    </ul>
+
+    <button class="mobile-menu-btn" id="mobileMenuBtn">
+        <i class="fas fa-bars"></i>
+    </button>
+</nav>
+
+<!-- Gallery Hero -->
+<section class="gallery-hero">
+    <div class="container">
+        <h1 data-aos="fade-down">Our Gallery</h1>
+        <p data-aos="fade-up" data-aos-delay="200">
+            Capturing the energy, unity, laughter, and impact of every moment we shine together.
+        </p>
+
+        <div class="gallery-filters" data-aos="fade-up" data-aos-delay="300">
+            <button class="filter-btn active" data-filter="all">All Moments</button>
+            <button class="filter-btn" data-filter="charity">Charity & Impact</button>
+            <button class="filter-btn" data-filter="social">Social Hangouts</button>
+            <button class="filter-btn" data-filter="workshops">Workshops & Growth</button>
+            <button class="filter-btn" data-filter="celebration">Celebration Nights</button>
+        </div>
+    </div>
+</section>
+
+<!-- Masonry Gallery -->
+<section class="gallery-section" style="padding-top: 0;">
+    <div class="container">
+        <div class="gallery-masonry" id="galleryMasonry">
+            <!-- Charity -->
+            <div class="gallery-item" data-category="charity">
+                <img src="https://images.unsplash.com/photo-1593113598332-cd288d649433?auto=format&fit=crop&w=1200&q=80" alt="Community outreach" loading="lazy">
+            </div>
+            <div class="gallery-item" data-category="charity">
+                <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1200&q=80" alt="Volunteers distributing aid" loading="lazy">
+            </div>
+
+            <!-- Social -->
+            <div class="gallery-item" data-category="social">
+                <img src="https://images.unsplash.com/photo-1522202176988-66273c2b033f?auto=format&fit=crop&w=1200&q=80" alt="Youth group laughing" loading="lazy">
+            </div>
+            <div class="gallery-item" data-category="social">
+                <img src="https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?auto=format&fit=crop&w=1200&q=80" alt="Friends at hangout" loading="lazy">
+            </div>
+
+            <!-- Workshops -->
+            <div class="gallery-item" data-category="workshops">
+                <img src="https://images.unsplash.com/photo-1524178232363-64cc13b3d743?auto=format&fit=crop&w=1200&q=80" alt="Skill-building session" loading="lazy">
+            </div>
+
+            <!-- Celebration -->
+            <div class="gallery-item" data-category="celebration">
+                <img src="https://images.unsplash.com/photo-1544022613-eb62e4c3d8e3?auto=format&fit=crop&w=1200&q=80" alt="Party night energy" loading="lazy">
+            </div>
+
+            <!-- Add your real photos here with correct data-category -->
+            <!-- Example: -->
+            <!-- <div class="gallery-item" data-category="charity">
+                <img src="your-event-photo-1.jpg" alt="Description of photo" loading="lazy">
+            </div> -->
+        </div>
+
+        <button class="load-more" data-aos="fade-up">Load More Moments</button>
+
+        <!-- Admin Upload Note -->
+        <div class="admin-note" data-aos="fade-up" data-aos-delay="400">
+            <h3>Photo Upload Note – For Admins Only</h3>
+            <p>To keep the gallery fresh and reflective of our latest activities:</p>
+            <ul>
+                <li>Upload high-quality, well-lit photos (minimum 1200px wide recommended)</li>
+                <li>Always resize images before upload (aim for 200–400 KB per photo to keep page fast)</li>
+                <li>Use descriptive alt text for accessibility (e.g. "Shine Society members planting trees during 2025 outreach")</li>
+                <li>Group photos by category when adding (charity, social, workshops, celebration)</li>
+                <li>Remove any photo that includes minors without parental consent</li>
+                <li>Current method: Replace placeholder Unsplash links with real file paths (e.g. <code>images/events/2025-cleanup-01.jpg</code>)</li>
+                <li>Future improvement: Add admin dashboard for drag-and-drop uploads + auto-categorization</li>
+            </ul>
+            <p style="margin-top: 1.5rem; font-style: italic; color: var(--blue);">
+                Questions? Contact Jay (Media Personnel) via WhatsApp or email.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox">
+    <div class="lightbox-content">
+        <span class="lightbox-close" id="closeLightbox">&times;</span>
+        <img class="lightbox-img" id="lightboxImg" src="" alt="Gallery image">
+        <div class="lightbox-nav">
+            <button class="lightbox-nav-btn" id="prevBtn"><i class="fas fa-chevron-left"></i></button>
+            <button class="lightbox-nav-btn" id="nextBtn"><i class="fas fa-chevron-right"></i></button>
+        </div>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer>
+    <div class="copyright">
+        © 2025 Shine Society ✨ | Made with <i class="fas fa-heart" style="color: #f87171;"></i> for the next generation
+    </div>
+</footer>
+
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script>
+    AOS.init({ duration: 800, once: true });
+
+    // Lightbox logic
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightboxImg');
+    const closeBtn = document.getElementById('closeLightbox');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+
+    let currentIndex = 0;
+    const galleryImages = document.querySelectorAll('.gallery-item img');
+
+    function openLightbox(index) {
+        currentIndex = index;
+        lightboxImg.src = galleryImages[index].src;
+        lightboxImg.alt = galleryImages[index].alt;
+        lightbox.classList.add('show');
+    }
+
+    galleryImages.forEach((img, index) => {
+        img.addEventListener('click', () => openLightbox(index));
+    });
+
+    closeBtn.addEventListener('click', () => lightbox.classList.remove('show'));
+    lightbox.addEventListener('click', e => { if (e.target === lightbox) lightbox.classList.remove('show'); });
+
+    prevBtn.addEventListener('click', () => {
+        currentIndex = (currentIndex - 1 + galleryImages.length) % galleryImages.length;
+        lightboxImg.src = galleryImages[currentIndex].src;
+        lightboxImg.alt = galleryImages[currentIndex].alt;
+    });
+
+    nextBtn.addEventListener('click', () => {
+        currentIndex = (currentIndex + 1) % galleryImages.length;
+        lightboxImg.src = galleryImages[currentIndex].src;
+        lightboxImg.alt = galleryImages[currentIndex].alt;
+    });
+
+    // Category filter
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            const filter = btn.dataset.filter;
+            document.querySelectorAll('.gallery-item').forEach(item => {
+                if (filter === 'all' || item.dataset.category === filter) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        });
+    });
+
+    // Load more placeholder
+    document.querySelector('.load-more').addEventListener('click', () => {
+        alert("More photos coming soon! Contact admin to upload new images.");
+    });
+</script>
+</body>
+</html></title>
+</head>
+<body>
+
+</body>
+</html>
